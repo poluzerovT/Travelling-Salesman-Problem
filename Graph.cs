@@ -8,8 +8,6 @@ namespace TravellingSalesmanProblem_AntAlgorithm
 {
     class Graph
     {
-
-
         public int[,] weights; 
         public Edge[,] edges;
         public int size;
@@ -31,31 +29,20 @@ namespace TravellingSalesmanProblem_AntAlgorithm
             }
         }
 
-        public Node FindNode(int index)
+        public void SetFeromones(double startFeromone)
         {
-            foreach (var node in nodes)
+            for (int i = 0; i < size; i++)
             {
-                if (node.index == index)
+                for (int j = i + 1; j < size; j++)
                 {
-                    return node;
+                    edges[i, j].feromone = startFeromone;
+                    edges[j, i].feromone = startFeromone;
                 }
             }
-
-            return null;
         }
-
         public Edge FindEdge(int ind1, int ind2)
         {
-            return FindNode(ind1).FindEdge(ind2);
-        }
-
-        public void Print()
-        {
-            foreach (var node in nodes)
-            {
-                node.Print();
-                Console.WriteLine();
-            }
+            return edges[ind1, ind2];
         }
     }
 }

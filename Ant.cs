@@ -11,14 +11,15 @@ namespace TravellingSalesmanProblem_AntAlgorithm
         private Graph g;
         
         private int size;
-        private int startNode = 0;
-        private int antCount = 10;
-        private double startFeromone = 0.2;
+        private int antCount;
 
-        private double alfa = 1;
-        private double beta = 4;
-        private double p = 0.3;
-        private double ferCoef = 100;
+        private int startNode = 0;
+        private double startFeromone = 1;
+
+        private double alfa;
+        private double beta;
+        private double p;
+        private double ferCoef = 2.5;
 
         Random rand = new Random();
 
@@ -37,10 +38,7 @@ namespace TravellingSalesmanProblem_AntAlgorithm
            
             bestWay = (null, Double.MaxValue);
 
-            foreach (var edge in g.edges)
-            {
-                edge.feromone = startFeromone;
-            }
+            g.SetFeromones(startFeromone);
         }
 
         private void Init(List<int> visitedNodes, List<int>avalibalNodes)
@@ -59,11 +57,18 @@ namespace TravellingSalesmanProblem_AntAlgorithm
        
         private void RefreshFeromones()
         {
-            foreach (var edge in g.edges)
+            for(int i = 0; i < size; i++)
             {
-                edge.feromone *= (1 - p);
-                edge.feromone += edge.dFeromone;
-                edge.dFeromone = 0;
+                for (int j = i + 1; j < size; j++)
+                {
+                    g.edges[i,j].feromone *= (1 - p);
+                    g.edges[i, j].feromone += g.edges[i, j].dFeromone;
+                    g.edges[i, j].dFeromone = 0;
+
+                    g.edges[j, i].feromone *= (1 - p);
+                    g.edges[j, i].feromone += g.edges[j, i].dFeromone;
+                    g.edges[j, i].dFeromone = 0;
+                }
             }
         }
 
