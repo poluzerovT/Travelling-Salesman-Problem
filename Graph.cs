@@ -8,30 +8,25 @@ namespace TravellingSalesmanProblem_AntAlgorithm
 {
     class Graph
     {
-        public List<Node> nodes;
-        public List<Edge> edges;
 
+
+        public int[,] weights; 
+        public Edge[,] edges;
         public int size;
 
         public Graph(int[,] m)
         {
-            nodes = new List<Node>();
-            edges = new List<Edge>();
-
             size = (int)Math.Sqrt(m.Length);
-            for (int i = 0; i < size; i++)
-            {
-               nodes.Add(new Node(i));
-            }
+
+            weights = m;
+            edges = new Edge[size, size];
 
             for (int i = 0; i < size; i++)
             {
                 for (int j = i + 1; j < size; j++)
                 {
-                    Edge edge = new Edge(nodes[i], nodes[j], m[i, j]);
-                    nodes[i].AddEdge(edge);
-                    nodes[j].AddEdge(edge);
-                    edges.Add(edge);
+                    edges[i, j] = new Edge(null, null, m[i, j], 0);
+                    edges[j, i] = new Edge(null, null, m[i, j], 0);
                 }
             }
         }
