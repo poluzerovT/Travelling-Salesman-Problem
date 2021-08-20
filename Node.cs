@@ -17,10 +17,6 @@ namespace TravellingSalesmanProblem_AntAlgorithm
             this.index = index;
         }
 
-        public void AddEdge(Edge edge)
-        {
-            edges.Add(edge);
-        }
 
         public Edge FindEdge(int ind)
         {
