@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Runtime.InteropServices;
 
-namespace TravellingSalesmanProblem_AntAlgorithm
+namespace TravelingSalesmanProblem_AntAlgorithm
 {
     class Program
     {
-        private static int[,] m = new int[,]
+        private static int[,] example = new int[,] // 10
         {
             {0, 1, 5, 2, 3, 2, 8},
             {1, 0, 1, 1, 2, 1, 3},
@@ -16,7 +16,7 @@ namespace TravellingSalesmanProblem_AntAlgorithm
             {8, 3, 6, 3, 2, 1, 0}
         };
 
-        public static int[,] s20 = new int[,] //357
+        private static int[,] s20 = new int[,] //357
         {
             {0, 28, 56, 53, 65, 12, 81, 69, 37, 13, 65, 20, 61, 67, 35, 28, 45, 38, 56, 41},
             {28, 0, 81, 52, 69, 32, 74, 17, 80, 59, 64, 19, 88, 94, 56, 50, 90, 84, 38, 76},
@@ -40,22 +40,31 @@ namespace TravellingSalesmanProblem_AntAlgorithm
             {41, 76, 29, 89, 19, 69, 41, 25, 99, 42, 31, 46, 15, 71, 22, 99, 96, 41, 44, 0}
         };
 
-        
+        // read more about algorithm: https://ru.wikipedia.org/wiki/%D0%9C%D1%83%D1%80%D0%B0%D0%B2%D1%8C%D0%B8%D0%BD%D1%8B%D0%B9_%D0%B0%D0%BB%D0%B3%D0%BE%D1%80%D0%B8%D1%82%D0%BC
 
-    static void Main(string[] args)
+        // Main runs method for 'total' times with counting:
+        // 1) the shortest route 
+        // 2) method accuracy (if known the shortest), 
+        // 3) avg route length,
+        // 
+        // control value - the shortest known route to calculate accuracy
+        // train times - number of iterations in method
+        // 
+
+        static void Main(string[] args)
         {
             int good = 0;
             double avg = 0;
             double total = 1000;
             double min = Int32.MaxValue;
-            double eps = 1;
 
+            double eps = 1;
             double controlValue = 10;
-            int trainTimes = 15;
+            int trainTimes = 25;
 
             for (int i = 0; i < total; i++)
             {
-                Ant a = new Ant(new Graph(m), 0, 1, 4, 0.3);
+                Ant a = new Ant(new Graph(example), 0, 1, 4, 0.3);
                 a.Train(trainTimes);
                 if (Math.Abs(a.BestWay.Item2 - controlValue) < eps)
                 {
@@ -63,6 +72,7 @@ namespace TravellingSalesmanProblem_AntAlgorithm
                 }
 
                 avg += a.BestWay.Item2;
+
                 if (min > a.BestWay.Item2)
                 {
                     min = a.BestWay.Item2;

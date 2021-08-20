@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TravellingSalesmanProblem_AntAlgorithm
+namespace TravelingSalesmanProblem_AntAlgorithm
 {/// <summary>
-/// Represent Ant Algorithm for Travelling Salesman Problem
+/// Represent Ant Algorithm for Traveling Salesman Problem
 /// </summary>
     class Ant
     {
@@ -14,16 +14,15 @@ namespace TravellingSalesmanProblem_AntAlgorithm
         
         private readonly int _size;
         private readonly int _antCount;
-    
+        private readonly double _startFeromone;
         private readonly int _startNode;
-        public double StartFeromone { get; }
 
         private readonly double _alfa;
         private readonly double _beta;
         private readonly double _p;
-        private readonly double _feromoneCoef = 2.5;
+        private readonly double _feromoneCoef;
 
-        Random rand = new Random();
+        readonly Random rand;
 
         public (List<int>, double) BestWay;
         /// <summary>
@@ -42,16 +41,16 @@ namespace TravellingSalesmanProblem_AntAlgorithm
             this.g = g;
             this._startNode = startNode;
             this._size = g.Size;
-
             this._alfa = alfa;
             this._beta = beta;
             this._p = p;
             this._antCount = antCount;
-            this.StartFeromone = startFeromone;
+            this._startFeromone = startFeromone;
             this._feromoneCoef = feromoneCoef;
 
             BestWay = (null, Double.MaxValue);
 
+            rand = new Random();
             g.SetFeromones(startFeromone);
         }
         

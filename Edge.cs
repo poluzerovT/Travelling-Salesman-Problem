@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TravellingSalesmanProblem_AntAlgorithm
+namespace TravelingSalesmanProblem_AntAlgorithm
 {
     /// <summary>
     /// Graph edge
