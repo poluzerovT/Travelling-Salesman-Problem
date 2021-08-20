@@ -6,9 +6,11 @@ using System.Threading.Tasks;
 
 namespace TravellingSalesmanProblem_AntAlgorithm
 {
+    /// <summary>
+    /// Graph
+    /// </summary>
     class Graph
     {
-        private readonly int[,] _weights;
         private readonly Edge[,] _edges;
         private readonly int _size;
 
@@ -21,7 +23,6 @@ namespace TravellingSalesmanProblem_AntAlgorithm
         public Graph(int[,] m)
         {
             _size = (int)Math.Sqrt(m.Length);
-            _weights = m;
             _edges = new Edge[_size, _size];
 
             for (int i = 0; i < _size; i++)
