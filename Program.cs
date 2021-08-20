@@ -48,23 +48,24 @@ namespace TravellingSalesmanProblem_AntAlgorithm
             double avg = 0;
             double total = 1000;
             double min = Int32.MaxValue;
+            double eps = 1;
 
             double controlValue = 10;
-            int trainTimes = 25;
+            int trainTimes = 15;
 
             for (int i = 0; i < total; i++)
             {
-                Ant a = new Ant(new Graph(s20), 1, 4, 0.5, 10);
+                Ant a = new Ant(new Graph(m), 0, 1, 4, 0.3);
                 a.Train(trainTimes);
-                if (a.bestWay.Item2.CompareTo(controlValue) == 0)
+                if (Math.Abs(a.BestWay.Item2 - controlValue) < eps)
                 {
                     good++;
                 }
 
-                avg += a.bestWay.Item2;
-                if (min > a.bestWay.Item2)
+                avg += a.BestWay.Item2;
+                if (min > a.BestWay.Item2)
                 {
-                    min = a.bestWay.Item2;
+                    min = a.BestWay.Item2;
                 }
                 a.PrintBest();
             }

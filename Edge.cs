@@ -6,27 +6,29 @@ using System.Threading.Tasks;
 
 namespace TravellingSalesmanProblem_AntAlgorithm
 {
+    /// <summary>
+    /// Graph edge
+    /// </summary>
     class Edge
     {
-        public double feromone;
-        public double weight;
-        public Node node1;
-        public Node node2;
+        public double Feromone { get; set; }
 
-        public double dFeromone;
+        public double Weight { get; }
+        /// <summary>
+        /// Storage of additional feromone
+        /// </summary>
+        public double DFeromone { get; set; }
 
-        public Edge(Node node1, Node node2, double weight, double feromone=0)
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        /// <param name="weight">Edge weight</param>
+        /// <param name="feromone">Edge feromone (default = 0)</param>
+        public Edge(double weight, double feromone=0)
         {
-            this.node1 = node1;
-            this.node2 = node2;
-            this.weight = weight;
-            this.feromone = feromone;
-            this.dFeromone = 0;
-        }
-
-        public void Print()
-        {
-            Console.WriteLine("[{0}, {1}] w:{2}  f:{3}", node1.index, node2.index, weight, feromone);
+            this.Weight = weight;
+            this.Feromone = feromone;
+            this.DFeromone = 0;
         }
     }
 }

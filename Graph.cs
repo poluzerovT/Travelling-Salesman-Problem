@@ -8,41 +8,46 @@ namespace TravellingSalesmanProblem_AntAlgorithm
 {
     class Graph
     {
-        public int[,] weights; 
-        public Edge[,] edges;
-        public int size;
+        private readonly int[,] _weights;
+        private readonly Edge[,] _edges;
+        private readonly int _size;
 
+        public Edge[,] Edges => _edges;
+        public int Size => _size;
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        /// <param name="m">Distance matrix</param>
         public Graph(int[,] m)
         {
-            size = (int)Math.Sqrt(m.Length);
+            _size = (int)Math.Sqrt(m.Length);
+            _weights = m;
+            _edges = new Edge[_size, _size];
 
-            weights = m;
-            edges = new Edge[size, size];
-
-            for (int i = 0; i < size; i++)
+            for (int i = 0; i < _size; i++)
             {
-                for (int j = i + 1; j < size; j++)
+                for (int j = i + 1; j < _size; j++)
                 {
-                    edges[i, j] = new Edge(null, null, m[i, j], 0);
-                    edges[j, i] = new Edge(null, null, m[i, j], 0);
+                    _edges[i, j] = new Edge(m[i, j], 0);
+                    _edges[j, i] = new Edge( m[i, j], 0);
                 }
             }
         }
 
+        /// <summary>
+        /// Set feromone for each edge
+        /// </summary>
+        /// <param name="startFeromone">Start amount of feromone</param>
         public void SetFeromones(double startFeromone)
         {
-            for (int i = 0; i < size; i++)
+            for (int i = 0; i < _size; i++)
             {
-                for (int j = i + 1; j < size; j++)
+                for (int j = i + 1; j < _size; j++)
                 {
-                    edges[i, j].feromone = startFeromone;
-                    edges[j, i].feromone = startFeromone;
+                    _edges[i, j].Feromone = startFeromone;
+                    _edges[j, i].Feromone = startFeromone;
                 }
             }
-        }
-        public Edge FindEdge(int ind1, int ind2)
-        {
-            return edges[ind1, ind2];
         }
     }
 }
